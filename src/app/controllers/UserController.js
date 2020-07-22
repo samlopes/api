@@ -37,6 +37,7 @@ class UserController {
   // GET com ID - Listar 1 USUARIO
   async show(req, res) {
     const { id } = req.params;
+
     const user = await userModel.findById(id);
     return res.status(200).json({ user });
   }
@@ -64,7 +65,7 @@ class UserController {
 
     const { _id: id } = user;
 
-    const token = jwt.sign({ id }, "hygst87464hfjf87656h", {
+    const token = jwt.sign({ id }, process.env.JWT_KEY, {
       expiresIn: "1d",
     });
 
