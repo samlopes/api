@@ -1,9 +1,9 @@
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const userModel = require("../models/user");
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const userModel = require('../models/user');
 
 class UserController {
-  //POST - CRIAR USUARIO
+  // POST - CRIAR USUARIO
   async store(req, res) {
     const user = await userModel.create(req.body);
 
@@ -16,7 +16,7 @@ class UserController {
   async destroy(req, res) {
     const { id } = req.params;
     await userModel.findByIdAndDelete(id);
-    return res.status(200).json({ msg: "Usuário deletado com sucesso" });
+    return res.status(200).json({ msg: 'Usuário deletado com sucesso' });
   }
 
   // PUT - ATUALIZAR USUARIO
@@ -42,7 +42,7 @@ class UserController {
     return res.status(200).json({ user });
   }
 
-  //GET com TODOS USUARIOS
+  // GET com TODOS USUARIOS
   async index(req, res) {
     const users = await userModel.find();
     return res.status(200).json({ users });
@@ -54,19 +54,19 @@ class UserController {
     const user = await userModel.findOne({ email }); // email:email
 
     if (!user) {
-      return res.status(401).json({ msg: "Credencias inválidas" });
+      return res.status(401).json({ msg: 'Credencias inválidas' });
     }
 
     const correctUser = await bcrypt.compare(pass, user.pass);
 
     if (!correctUser) {
-      return res.status(401).json({ msg: "Credenciais inválidas" });
+      return res.status(401).json({ msg: 'Credenciais inválidas' });
     }
 
     const { _id: id } = user;
 
     const token = jwt.sign({ id }, process.env.JWT_KEY, {
-      expiresIn: "1d",
+      expiresIn: '1d',
     });
 
     return res.json({ token });

@@ -1,4 +1,4 @@
-const yup = require("yup");
+const yup = require('yup');
 
 class Validators {
   async userCreateValidator(req, res, next) {
@@ -11,7 +11,7 @@ class Validators {
     const userValidate = await userMask.isValid(req.body, { strict: true });
 
     if (!userValidate) {
-      return res.status(400).json({ msg: "Dados incorretos" });
+      return res.status(400).json({ msg: 'Dados incorretos' });
     }
     next();
   }
@@ -25,7 +25,7 @@ class Validators {
     const userValidate = await userMask.isValid(req.body);
 
     if (!userValidate) {
-      return res.status(400).json({ msg: "Dados incorretos" });
+      return res.status(400).json({ msg: 'Dados incorretos' });
     }
 
     next();

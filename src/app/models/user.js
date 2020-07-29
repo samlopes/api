@@ -1,5 +1,5 @@
-const bcrypt = require("bcryptjs");
-const mongoose = require("../../config/db");
+const bcrypt = require('bcryptjs');
+const mongoose = require('../../config/db');
 
 const UserSchema = mongoose.Schema(
   {
@@ -21,11 +21,11 @@ const UserSchema = mongoose.Schema(
   }
 );
 
-UserSchema.pre("save", async function (next) {
+UserSchema.pre('save', async function (next) {
   const hashPass = await bcrypt.hash(this.pass, 10);
   this.pass = hashPass;
   next();
 });
 
-const User = mongoose.model("User", UserSchema);
+const User = mongoose.model('User', UserSchema);
 module.exports = User;
