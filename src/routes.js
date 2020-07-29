@@ -14,3 +14,4 @@ routes.delete('/users/:id', userController.destroy);
 routes.put('/users/:id', validatorMid.userUpdateValidor, userController.update);
 
 module.exports = routes;
+exports = routes;
