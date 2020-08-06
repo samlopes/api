@@ -7,7 +7,7 @@ const jwtMid = require('./app/middlewares/jwt');
 routes.post('/login', userController.auth);
 routes.post('/users', validatorMid.userCreateValidator, userController.store);
 
-routes.use(jwtMid);
+// routes.use(jwtMid);
 
 routes.get('/users', userController.index);
 routes.get('/users/:id', userController.show);
