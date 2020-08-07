@@ -8,6 +8,7 @@ const express = require('express'); // commonjs
 require('express-async-errors');
 const morgan = require('morgan');
 const helmet = require('helmet');
+const path = require('path');
 const routes = require('./routes');
 const logger = require('./helper/logger');
 
@@ -17,6 +18,13 @@ app.use(helmet());
 app.use(cors());
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(
+  '/images',
+  express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
+);
+
 app.use(morgan('dev'));
 app.use(routes);
 

@@ -2,6 +2,10 @@ const chocolateModel = require('../models/chocolate');
 
 class ChocolateController {
   async store(req, res) {
+    const { key } = req.file; // nome com hash da imagem
+
+    req.body.imagem = `${process.env.URL_HOST}/images/${key}`;
+
     const chocolate = await chocolateModel.create(req.body);
     return res.status(201).json(chocolate);
   }
